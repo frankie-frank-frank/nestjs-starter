@@ -18,14 +18,16 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "db:run": "bash db/reset.sh",
-    "db:start": "npx prisma db pull && npx prisma generate"
+    "db:run": "bash scripts/db.sh",
+    "db:migrate": "npx prisma migrate dev",
+    "db:start": "db:run && db:migrate && npx prisma db pull"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
     "@prisma/client": "^4.11.0",
+    "dotenv": "^16.0.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
   },

@@ -17,7 +17,8 @@ docker run \
   --rm --name fcc-nestjs -d \
   -e="POSTGRES_PASSWORD=gdssteppa" \
   -e="POSTGRES_DB=gds-compliance" \
-  -p 5432:5432\
+  -e="POSTGRES_USER=amalitechie" \
+  -p 5432:5432 \
   -v=$DIR:/var/lib/postgresql \
   postgres
 

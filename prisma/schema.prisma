@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Trustworthiness {
+  LOW
+  MEDIUM 
+  HIGH
+}
+
+model Supplier {
+  id Int @id @default(autoincrement())
+  name String
+  contact Contact[]
+  trustworthiness Trustworthiness
+  responsibleBuyer String
+  comments String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Contact {
+  id Int @id @default(autoincrement())
+  name String
+  function String 
+  email String 
+  phone String 
+  language String 
+  password String
+  passwordReset Boolean @default(false)
+  supplier Supplier @relation(fields: [supplierId], references: [id])
+  supplierId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
